@@ -12,35 +12,38 @@ class UserController {
 
       return res.json(userData)
     } catch (err) {
-      console.log(err)
+      next(err)
     }
   }
 
   async login(req, res, next) {
     try {
     } catch (err) {
-      console.log(err)
+      next(err)
     }
   }
 
   async logout(req, res, next) {
     try {
     } catch (err) {
-      console.log(err)
+      next(err)
     }
   }
 
   async activate(req, res, next) {
     try {
-    } catch (err) {
-      console.log(err)
+      const activationLink = req.params.link
+      await userService.activate(activationLink)
+      return res.redirect(process.env.CLIENT_URL)
+    } catch (err) { 
+      next(err)
     }
   }
 
   async refresh(req, res, next) {
     try {
     } catch (err) {
-      console.log(err)
+      next(err)
     }
   }
 
@@ -48,7 +51,7 @@ class UserController {
     try {
       res.json(['123', '432'])
     } catch (err) {
-      console.log(err)
+      next(err)
     }
   }
 }
