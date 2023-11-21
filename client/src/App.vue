@@ -1,5 +1,36 @@
 <template>
-  <div>
-    <h1 class="text-3xl font-bold underline bg-slate-600">Hello world!</h1>
+  <div class="container mx-auto py-5">
+    <PostForm @create="createPost" />
+    <PostList :posts="posts" />
   </div>
 </template>
+
+<script lang="ts">
+import PostForm from './components/PostForm.vue'
+import PostList from './components/PostList.vue'
+
+import { IPost } from './interfaces'
+
+import { defineComponent } from 'vue'
+
+export default defineComponent({
+  components: {
+    PostList,
+    PostForm,
+  },
+
+  data() {
+    return {
+      posts: [] as IPost[],
+    }
+  },
+
+  methods: {
+    createPost(post: IPost): void {
+      this.posts.push(post)
+    },
+  },
+})
+</script>
+
+<style scoped></style>
