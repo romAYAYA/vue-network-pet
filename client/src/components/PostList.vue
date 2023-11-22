@@ -12,7 +12,7 @@
 <script lang="ts">
 import { PropType, defineComponent } from 'vue'
 
-import { IPost } from '../interfaces'
+import { IPost } from '../models/IPost'
 
 export default defineComponent({
   props: {

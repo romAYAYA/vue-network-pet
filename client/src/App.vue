@@ -9,7 +9,7 @@
 import PostForm from './components/PostForm.vue'
 import PostList from './components/PostList.vue'
 
-import { IPost } from './interfaces'
+import { IPost } from './models/IPost'
 
 import { defineComponent } from 'vue'
 
