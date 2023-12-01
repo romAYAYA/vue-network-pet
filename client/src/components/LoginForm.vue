@@ -7,17 +7,11 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script setup lang="ts">
+import { ref } from 'vue'
 
-export default defineComponent({
-  data() {
-    return {
-      email: '',
-      password: '',
-    }
-  },
-})
+const email = ref('')
+const password = ref('')
 </script>
 
 <style scoped></style>

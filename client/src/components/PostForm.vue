@@ -23,32 +23,26 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script setup lang="ts">
+import { ref, defineEmits } from 'vue'
 
-export default defineComponent({
-  data() {
-    return {
-      post: {
-        id: 0,
-        title: '',
-        body: '',
-      },
-    }
-  },
+const emits = defineEmits()
 
-  methods: {
-    createPost(): void {
-      this.post.id = Date.now()
-      this.$emit('create', this.post)
-      this.post = {
-        id: 0,
-        title: '',
-        body: '',
-      }
-    },
-  },
+const post = ref({
+  id: 0,
+  title: '',
+  body: '',
 })
+
+const createPost = () => {
+  post.value.id = Date.now()
+  emits('create', post.value)
+  post.value = {
+    id: 0,
+    title: '',
+    body: '',
+  }
+}
 </script>
 
 <style scoped></style>

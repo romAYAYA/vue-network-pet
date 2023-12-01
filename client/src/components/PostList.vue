@@ -1,5 +1,5 @@
 <template>
-  <div class="post" v-for="post in posts" :key="post.id">
+  <div class="post" v-for="post in props.posts" :key="post.id">
     <h2
       class="mb-4 text-3xl font-extrabold text-gray-900 md:text-5xl lg:text-6xl"
     >
@@ -9,17 +9,14 @@
   </div>
 </template>
 
-<script lang="ts">
-import { PropType, defineComponent } from 'vue'
-
+<script setup lang="ts">
+import { PropType, defineProps } from 'vue'
 import { IPost } from '../models/IPost'
 
-export default defineComponent({
-  props: {
-    posts: {
-      type: Array as PropType<IPost[]>,
-      required: true,
-    },
+const props = defineProps({
+  posts: {
+    type: Array as PropType<IPost[]>,
+    required: true,
   },
 })
 </script>

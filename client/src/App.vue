@@ -2,35 +2,32 @@
   <div class="container mx-auto py-5">
     <PostForm @create="createPost" />
     <PostList :posts="posts" />
+    <div>
+      <p>Count: {{ authStore.count }}</p>
+      <p>Name: {{ authStore.name }}</p>
+      <p>Double Count: {{ authStore.doubleCount }}</p>
+      <button @click="authStore.increment">Increment</button>
+    </div>
   </div>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
+import { ref } from 'vue'
 import PostForm from './components/PostForm.vue'
 import PostList from './components/PostList.vue'
-
 import { IPost } from './models/IPost'
 
-import { defineComponent } from 'vue'
+import { useAuthStore } from './store/index'
 
-export default defineComponent({
-  components: {
-    PostList,
-    PostForm,
-  },
+const posts = ref([] as IPost[])
 
-  data() {
-    return {
-      posts: [] as IPost[],
-    }
-  },
+const createPost = (post: IPost): void => {
+  posts.value.push(post)
+}
 
-  methods: {
-    createPost(post: IPost): void {
-      this.posts.push(post)
-    },
-  },
-})
+const authStore = useAuthStore()
 </script>
 
+<!-- 46:44 -->
+<!-- 1:27 -->
 <style scoped></style>
