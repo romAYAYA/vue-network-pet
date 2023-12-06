@@ -13,7 +13,7 @@ app.use(express.json())
 app.use(cookieParser())
 app.use(
   cors({
-    origin: 'http://localhost:5173',
+    origin: process.env.CLIENT_URL,
     credentials: true,
   })
 )
@@ -23,10 +23,7 @@ app.use(errorMiddleware) // обязательно подключать в са�
 
 const start = async () => {
   try {
-    await mongoose.connect(process.env.DB_URL, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    })
+    await mongoose.connect(process.env.DB_URL)
     app.listen(PORT, () => console.log(`Server started on Port =  ${PORT}`))
   } catch (err) {
     console.log(err)

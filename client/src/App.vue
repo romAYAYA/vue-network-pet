@@ -1,18 +1,15 @@
 <template>
-  <div class="container mx-auto py-5">
+  <div v-if="authStore.isLoading">Loading...</div>
+  <div v-else class="container mx-auto py-5">
+    <div>
+      <h1 v-if="authStore.isAuth">
+        User authorized {{ authStore.user.email }}
+        <button @click="authStore.logout">Logout</button>
+      </h1>
+      <h1 v-else><LoginForm /></h1>
+    </div>
     <PostForm @create="createPost" />
     <PostList :posts="posts" />
-
-    <form @submit.prevent="register">
-      <input v-model="email" placeholder="Email" type="text" />
-      <input v-model="password" type="text" />
-
-      <button type="button" @click="register">Register</button>
-
-      <div v-if="authStore.isAuth">
-        <p>Welcome, {{ authStore.user.email }}</p>
-      </div>
-    </form>
   </div>
 </template>
 
@@ -20,28 +17,21 @@
 import { ref } from 'vue'
 import PostForm from './components/PostForm.vue'
 import PostList from './components/PostList.vue'
+import LoginForm from './components/LoginForm.vue'
 import { IPost } from './models/IPost'
-
 import { useAuthStore } from './store/index'
 
 const posts = ref([] as IPost[])
-const email = ref('')
-const password = ref('')
+
+const authStore = useAuthStore()
 
 const createPost = (post: IPost): void => {
   posts.value.push(post)
 }
-const authStore = useAuthStore()
 
-const register = () => {
-  authStore.registration(email.value, password.value)
+if (localStorage.getItem('token')) {
+  authStore.checkAuth()
 }
-
-// const login = () => {
-//   authStore.login(email.value, password.value)
-// }
 </script>
 
-<!-- 46:44 -->
-<!-- 1:27 -->
 <style scoped></style>
